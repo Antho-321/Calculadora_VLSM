@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,80 +17,101 @@
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
 
-    <HorizontalScrollView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-        <TableLayout
-            android:id="@+id/results_table"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*">
+            android:orientation="vertical">
 
-            <!-- Header Row -->
-            <TableRow
-                android:background="#273B4D"
-                android:padding="5dp">
+            <!-- Estructura correcta para permitir scroll horizontal y vertical -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <TextView
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Subnet"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IP Base"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
+                    <TableLayout
+                        android:id="@+id/results_table"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="*">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CIDR"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
+                        <!-- Header Row -->
+                        <TableRow
+                            android:background="#273B4D"
+                            android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hosts Req."
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Subnet"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hosts Avail."
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IP Base"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IP Range"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CIDR"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Broadcast"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:padding="5dp" />
-            </TableRow>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hosts Req."
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
 
-            <!-- Data rows will be added programmatically -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hosts Avail."
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
 
-        </TableLayout>
-    </HorizontalScrollView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IP Range"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Broadcast"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:padding="5dp" />
+                        </TableRow>
+
+                        <!-- Data rows will be added programmatically here -->
+                        <!-- Ahora las filas pueden agregarse al mismo TableLayout -->
+
+                    </TableLayout>
+                </androidx.core.widget.NestedScrollView>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

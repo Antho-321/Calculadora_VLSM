@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,24 +133,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // This method shows the calculated subnet results in a dialog with a table
+    // Esta es la versión actualizada del método showResultsDialog
     private void showResultsDialog(List<VLSMCalculator.SubnetResult> results) {
-        // Create dialog
+        // Crear el diálogo
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Resultados de Subredes VLSM");
 
-        // Inflate the custom layout for the dialog
+        // Inflar el diseño personalizado para el diálogo
         View dialogView = LayoutInflater.from(this).inflate(R.layout.subnet_results_layout, null);
         builder.setView(dialogView);
 
-        // Get the table layout from the view
+        // Obtener el TableLayout desde el diseño
         TableLayout tableLayout = dialogView.findViewById(R.id.results_table);
 
-        // Populate table with data
-        boolean alternateRowColor = false;
+        // Llenar la tabla con los resultados
+        boolean alternateRowColor = false;  // Usar colores alternos para las filas
         for (VLSMCalculator.SubnetResult subnet : results) {
             TableRow row = new TableRow(this);
 
-            // Set alternating row colors
+            // Establecer colores alternos para las filas
             if (alternateRowColor) {
                 row.setBackgroundColor(Color.parseColor("#F2F2F2"));
             } else {
@@ -157,45 +159,34 @@ public class MainActivity extends AppCompatActivity {
             }
             alternateRowColor = !alternateRowColor;
 
-            // Add subnet ID cell
+            // Agregar celdas con los datos de la subred
             addCell(row, "Subred " + subnet.getSubredId());
-
-            // Add IP Base cell
             addCell(row, subnet.getIpBase());
-
-            // Add CIDR cell
             addCell(row, "/" + subnet.getCidr());
-
-            // Add Hosts Requested cell
             addCell(row, String.valueOf(subnet.getHostsRequested()));
-
-            // Add Hosts Available cell
             addCell(row, String.valueOf(subnet.getHostsAvailable()));
-
-            // Add IP Range cell
             addCell(row, subnet.getRangeIps());
-
-            // Add Broadcast cell
             addCell(row, subnet.getBroadcast());
 
-            // Add the row to the table
+            // Agregar la fila a la tabla
             tableLayout.addView(row);
         }
 
-        // Add buttons to close the dialog
+        // Agregar botones para cerrar el diálogo
         builder.setPositiveButton("Cerrar", null);
 
-        // Create and show the dialog
+        // Crear y mostrar el diálogo
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    // Helper method to add a cell to a table row
+    // Método auxiliar para agregar una celda a una fila de la tabla
     private void addCell(TableRow row, String text) {
         TextView cell = new TextView(this);
         cell.setText(text);
-        cell.setPadding(10, 10, 10, 10);
-        cell.setTextColor(Color.BLACK);
+        cell.setPadding(16, 12, 16, 12);  // Aplicar el padding a cada celda
+        cell.setTextColor(ContextCompat.getColor(this, R.color.text_primary));  // Usar el color primario del texto
+        cell.setBackgroundResource(R.drawable.table_cell_bg);  // Usar el fondo de la celda
         row.addView(cell);
     }
 
